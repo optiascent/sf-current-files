@@ -1,0 +1,1184 @@
+{% comment %}
+  Fence Calculator Template for SimpleFencing.co.uk
+  Interactive calculator for estimating fence materials and costs
+{% endcomment %}
+
+<div class="fence-calculator-container">
+  <div class="calculator-hero">
+    <div class="hero-content">
+      <h1>Fence Calculator</h1>
+      <p>Calculate materials and costs for your vinyl fencing project with our comprehensive planning tool</p>
+    </div>
+  </div>
+
+  <div class="calculator-main">
+    <div class="calculator-form-section">
+      <div class="form-container">
+        <h2>Project Details</h2>
+        
+        <div class="form-section">
+          <h3>📏 Fence Dimensions</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fenceLength">Total Fence Length *</label>
+              <div class="input-with-unit">
+                <input type="number" id="fenceLength" placeholder="Enter length" min="1" step="0.1" required>
+                <select id="lengthUnit" class="unit-select">
+                  <option value="feet">Feet</option>
+                  <option value="meters">Meters</option>
+                </select>
+              </div>
+              <small class="help-text">Measure the total perimeter where fencing will be installed</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="fenceHeight">Fence Height *</label>
+              <select id="fenceHeight" required>
+                <option value="">Select height</option>
+                <option value="3" data-price-multiplier="0.8">3 feet (0.9m)</option>
+                <option value="4" data-price-multiplier="1.0">4 feet (1.2m)</option>
+                <option value="5" data-price-multiplier="1.2">5 feet (1.5m)</option>
+                <option value="6" data-price-multiplier="1.4">6 feet (1.8m)</option>
+                <option value="8" data-price-multiplier="1.8">8 feet (2.4m)</option>
+              </select>
+              <small class="help-text">Standard panel heights available</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>🏠 Fence Style & Type</h3>
+          <div class="style-grid">
+            <label class="style-card" for="style-picket">
+              <input type="radio" id="style-picket" name="fenceStyle" value="picket" data-price="120" required>
+              <div class="card-content">
+                <div class="card-image">🏡</div>
+                <h4>Picket Fence</h4>
+                <p class="price">£120 per panel</p>
+                <p class="description">Classic decorative fencing</p>
+              </div>
+            </label>
+            
+            <label class="style-card" for="style-privacy">
+              <input type="radio" id="style-privacy" name="fenceStyle" value="privacy" data-price="180" required>
+              <div class="card-content">
+                <div class="card-image">🔒</div>
+                <h4>Privacy Fence</h4>
+                <p class="price">£180 per panel</p>
+                <p class="description">Complete privacy screening</p>
+              </div>
+            </label>
+            
+            <label class="style-card" for="style-pool">
+              <input type="radio" id="style-pool" name="fenceStyle" value="pool" data-price="200" required>
+              <div class="card-content">
+                <div class="card-image">🏊</div>
+                <h4>Pool Fence</h4>
+                <p class="price">£200 per panel</p>
+                <p class="description">Safety compliant pool fencing</p>
+              </div>
+            </label>
+            
+            <label class="style-card" for="style-equine">
+              <input type="radio" id="style-equine" name="fenceStyle" value="equine" data-price="160" required>
+              <div class="card-content">
+                <div class="card-image">🐎</div>
+                <h4>Equine Fence</h4>
+                <p class="price">£160 per panel</p>
+                <p class="description">Horse-safe rail fencing</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>🚪 Gates & Posts</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="gateCount">Number of Gates</label>
+              <input type="number" id="gateCount" value="0" min="0" max="10">
+              <small class="help-text">How many gates do you need?</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="gateWidth">Gate Width</label>
+              <select id="gateWidth">
+                <option value="3" data-price="250">3 feet - £250</option>
+                <option value="4" data-price="300">4 feet - £300</option>
+                <option value="5" data-price="350">5 feet - £350</option>
+                <option value="6" data-price="400">6 feet - £400</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="cornerPosts">Corner Posts</label>
+              <input type="number" id="cornerPosts" value="0" min="0" max="20">
+              <small class="help-text">Number of corner/end posts needed</small>
+            </div>
+            
+            <div class="form-group">
+              <label for="slopeAdjustment">Terrain</label>
+              <select id="slopeAdjustment">
+                <option value="1.0">Level ground</option>
+                <option value="1.1">Slight slope</option>
+                <option value="1.2">Moderate slope</option>
+                <option value="1.3">Steep slope</option>
+              </select>
+              <small class="help-text">Affects installation complexity</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>⚙️ Installation Options</h3>
+          <div class="installation-options">
+            <label class="option-card">
+              <input type="radio" name="installation" value="diy" data-cost="0">
+              <div class="option-content">
+                <h4>🔨 DIY Installation</h4>
+                <p>Self-installation with our guides</p>
+                <span class="option-price">No additional cost</span>
+              </div>
+            </label>
+            
+            <label class="option-card">
+              <input type="radio" name="installation" value="professional" data-cost="50">
+              <div class="option-content">
+                <h4>👷 Professional Installation</h4>
+                <p>Installed by certified professionals</p>
+                <span class="option-price">£50 per linear meter</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="calculate-section">
+          <button type="button" id="calculateBtn" class="calculate-btn">
+            <span class="btn-icon">🧮</span>
+            Calculate My Project
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calculator-results-section">
+      <div class="results-container" id="resultsContainer">
+        <div class="results-header">
+          <h2>Your Project Estimate</h2>
+          <p class="results-subtitle">Detailed breakdown of materials and costs</p>
+        </div>
+
+        <div class="materials-breakdown">
+          <h3>📦 Materials Required</h3>
+          <div class="materials-grid">
+            <div class="material-item">
+              <div class="material-icon">🏠</div>
+              <div class="material-details">
+                <span class="material-name">Fence Panels</span>
+                <span class="material-quantity" id="panelCount">-</span>
+                <span class="material-cost" id="panelCost">£0</span>
+              </div>
+            </div>
+            
+            <div class="material-item">
+              <div class="material-icon">📏</div>
+              <div class="material-details">
+                <span class="material-name">Line Posts</span>
+                <span class="material-quantity" id="postCount">-</span>
+                <span class="material-cost" id="postCost">£0</span>
+              </div>
+            </div>
+            
+            <div class="material-item">
+              <div class="material-icon">🔧</div>
+              <div class="material-details">
+                <span class="material-name">Corner Posts</span>
+                <span class="material-quantity" id="cornerPostCount">-</span>
+                <span class="material-cost" id="cornerPostCost">£0</span>
+              </div>
+            </div>
+            
+            <div class="material-item">
+              <div class="material-icon">🚪</div>
+              <div class="material-details">
+                <span class="material-name">Gates</span>
+                <span class="material-quantity" id="gateTotal">-</span>
+                <span class="material-cost" id="gateCost">£0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cost-breakdown">
+          <h3>💰 Cost Breakdown</h3>
+          <div class="cost-items">
+            <div class="cost-item">
+              <span class="cost-label">Materials Subtotal:</span>
+              <span class="cost-value" id="materialsCost">£0</span>
+            </div>
+            <div class="cost-item">
+              <span class="cost-label">Installation Cost:</span>
+              <span class="cost-value" id="installationCost">£0</span>
+            </div>
+            <div class="cost-item">
+              <span class="cost-label">VAT (20%):</span>
+              <span class="cost-value" id="vatCost">£0</span>
+            </div>
+            <div class="cost-item total">
+              <span class="cost-label">Total Project Cost:</span>
+              <span class="cost-value" id="totalCost">£0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cost-comparison">
+          <h3>📊 Cost Comparison</h3>
+          <div class="comparison-chart">
+            <div class="comparison-item">
+              <span class="comparison-label">Vinyl Fence (50 years)</span>
+              <div class="comparison-bar">
+                <div class="bar vinyl" style="width: 100%"></div>
+              </div>
+              <span class="comparison-cost" id="vinylLifetimeCost">£0</span>
+            </div>
+            <div class="comparison-item">
+              <span class="comparison-label">Wood Fence (10 years)</span>
+              <div class="comparison-bar">
+                <div class="bar wood" style="width: 150%"></div>
+              </div>
+              <span class="comparison-cost" id="woodLifetimeCost">£0</span>
+            </div>
+          </div>
+          <p class="comparison-note">*Includes maintenance, repairs, and replacement costs over time</p>
+        </div>
+
+        <div class="results-actions">
+          <button type="button" id="getQuoteBtn" class="action-btn primary">
+            <span class="btn-icon">📋</span>
+            Get Professional Quote
+          </button>
+          <button type="button" id="saveEstimate" class="action-btn secondary">
+            <span class="btn-icon">💾</span>
+            Save Estimate
+          </button>
+          <button type="button" id="printEstimate" class="action-btn secondary">
+            <span class="btn-icon">🖨️</span>
+            Print Estimate
+          </button>
+        </div>
+
+        <div class="next-steps">
+          <h3>🎯 Next Steps</h3>
+          <div class="steps-grid">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Verify Measurements</h4>
+                <p>Double-check your measurements for accuracy</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Check Planning Permission</h4>
+                <p>Verify if planning permission is required</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Get Professional Quote</h4>
+                <p>Contact us for a detailed, personalized quote</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calculator-info">
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>📏 Accurate Measurements</h3>
+        <p>Our calculator uses industry-standard panel sizes and spacing for precise estimates.</p>
+      </div>
+      <div class="info-card">
+        <h3>💰 Transparent Pricing</h3>
+        <p>All costs are clearly broken down with no hidden fees or surprise charges.</p>
+      </div>
+      <div class="info-card">
+        <h3>🔧 Installation Options</h3>
+        <p>Choose between DIY installation or professional installation services.</p>
+      </div>
+      <div class="info-card">
+        <h3>📞 Expert Support</h3>
+        <p>Our team is available to help refine your estimate and answer questions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fence Calculator Styles -->
+<style>
+.fence-calculator-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.calculator-hero {
+  text-align: center;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: -20px -20px 40px -20px;
+  color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.calculator-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.form-container {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  height: fit-content;
+  sticky: top: 20px;
+}
+
+.form-container h2 {
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
+}
+
+.form-section {
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  color: #34495e;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 15px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.input-with-unit {
+  display: flex;
+  gap: 0;
+}
+
+.input-with-unit input {
+  flex: 1;
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+.unit-select {
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+  background: #f8f9fa;
+  min-width: 80px;
+}
+
+.help-text {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.style-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.style-card {
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  text-align: center;
+}
+
+.style-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+.style-card input[type="radio"] {
+  display: none;
+}
+
+.style-card input[type="radio"]:checked + .card-content {
+  color: #667eea;
+}
+
+.style-card input[type="radio"]:checked {
+  border-color: #667eea;
+  background: #f8f9ff;
+}
+
+.card-image {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.card-content h4 {
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.price {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.description {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.installation-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.option-card {
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.option-card:hover {
+  border-color: #667eea;
+}
+
+.option-card input[type="radio"] {
+  display: none;
+}
+
+.option-card input[type="radio"]:checked + .option-content {
+  color: #667eea;
+}
+
+.option-content h4 {
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.option-content p {
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+.option-price {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.calculate-section {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.calculate-btn {
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calculate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.results-container {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  display: none;
+}
+
+.results-container.show {
+  display: block;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.results-header h2 {
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.results-subtitle {
+  color: #6c757d;
+}
+
+.materials-breakdown,
+.cost-breakdown,
+.cost-comparison,
+.next-steps {
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.materials-breakdown:last-child,
+.cost-breakdown:last-child,
+.cost-comparison:last-child,
+.next-steps:last-child {
+  border-bottom: none;
+}
+
+.materials-breakdown h3,
+.cost-breakdown h3,
+.cost-comparison h3,
+.next-steps h3 {
+  color: #34495e;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.material-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.material-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  text-align: center;
+}
+
+.material-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.material-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.material-quantity {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.material-cost {
+  font-weight: 700;
+  color: #667eea;
+}
+
+.cost-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cost-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.cost-item.total {
+  border-top: 2px solid #e1e8ed;
+  padding-top: 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.cost-label {
+  color: #2c3e50;
+}
+
+.cost-value {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.cost-item.total .cost-value {
+  color: #2ecc71;
+  font-size: 1.3rem;
+}
+
+.comparison-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.comparison-label {
+  min-width: 150px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.comparison-bar {
+  flex: 1;
+  height: 30px;
+  background: #ecf0f1;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar {
+  height: 100%;
+  border-radius: 15px;
+  transition: width 0.8s ease;
+}
+
+.bar.vinyl {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.bar.wood {
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.comparison-cost {
+  min-width: 80px;
+  text-align: right;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.comparison-note {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+.results-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.action-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn.secondary {
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 2px solid #e1e8ed;
+}
+
+.action-btn.secondary:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  background: #667eea;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content h4 {
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.step-content p {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.calculator-info {
+  margin-bottom: 40px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.info-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.info-card h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.info-card p {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .calculator-main {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .form-container {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .fence-calculator-container {
+    padding: 0 15px;
+  }
+  
+  .calculator-hero {
+    margin: -15px -15px 30px -15px;
+    padding: 40px 20px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .style-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .installation-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .materials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .results-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .comparison-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .comparison-label {
+    min-width: auto;
+  }
+  
+  .comparison-bar {
+    width: 100%;
+  }
+}
+</style>
+
+<!-- Fence Calculator JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Calculator elements
+  const calculateBtn = document.getElementById('calculateBtn');
+  const resultsContainer = document.getElementById('resultsContainer');
+  
+  // Form elements
+  const fenceLength = document.getElementById('fenceLength');
+  const lengthUnit = document.getElementById('lengthUnit');
+  const fenceHeight = document.getElementById('fenceHeight');
+  const fenceStyleInputs = document.querySelectorAll('input[name="fenceStyle"]');
+  const gateCount = document.getElementById('gateCount');
+  const gateWidth = document.getElementById('gateWidth');
+  const cornerPosts = document.getElementById('cornerPosts');
+  const slopeAdjustment = document.getElementById('slopeAdjustment');
+  const installationInputs = document.querySelectorAll('input[name="installation"]');
+  
+  // Result elements
+  const panelCount = document.getElementById('panelCount');
+  const panelCost = document.getElementById('panelCost');
+  const postCount = document.getElementById('postCount');
+  const postCost = document.getElementById('postCost');
+  const cornerPostCount = document.getElementById('cornerPostCount');
+  const cornerPostCost = document.getElementById('cornerPostCost');
+  const gateTotal = document.getElementById('gateTotal');
+  const gateCost = document.getElementById('gateCost');
+  const materialsCost = document.getElementById('materialsCost');
+  const installationCost = document.getElementById('installationCost');
+  const vatCost = document.getElementById('vatCost');
+  const totalCost = document.getElementById('totalCost');
+  const vinylLifetimeCost = document.getElementById('vinylLifetimeCost');
+  const woodLifetimeCost = document.getElementById('woodLifetimeCost');
+
+  // Pricing constants
+  const PRICING = {
+    posts: {
+      line: 45,
+      corner: 55
+    },
+    installation: {
+      perMeter: 50
+    },
+    vat: 0.20,
+    maintenance: {
+      vinyl: 0, // Maintenance-free
+      wood: 150 // Annual maintenance cost
+    }
+  };
+
+  // Calculate button event
+  calculateBtn.addEventListener('click', function() {
+    if (validateForm()) {
+      calculateProject();
+      showResults();
+    }
+  });
+
+  // Action button events
+  document.getElementById('getQuoteBtn').addEventListener('click', function() {
+    const params = new URLSearchParams({
+      length: fenceLength.value,
+      unit: lengthUnit.value,
+      height: fenceHeight.value,
+      style: getSelectedValue(fenceStyleInputs),
+      gates: gateCount.value,
+      installation: getSelectedValue(installationInputs)
+    });
+    window.location.href = '/pages/quote-enhanced?' + params.toString();
+  });
+
+  document.getElementById('saveEstimate').addEventListener('click', function() {
+    saveEstimate();
+  });
+
+  document.getElementById('printEstimate').addEventListener('click', function() {
+    window.print();
+  });
+
+  // Validation function
+  function validateForm() {
+    const length = parseFloat(fenceLength.value);
+    const height = fenceHeight.value;
+    const style = getSelectedValue(fenceStyleInputs);
+
+    if (!length || length <= 0) {
+      alert('Please enter a valid fence length');
+      fenceLength.focus();
+      return false;
+    }
+
+    if (!height) {
+      alert('Please select a fence height');
+      fenceHeight.focus();
+      return false;
+    }
+
+    if (!style) {
+      alert('Please select a fence style');
+      return false;
+    }
+
+    return true;
+  }
+
+  // Main calculation function
+  function calculateProject() {
+    // Get form values
+    const length = parseFloat(fenceLength.value);
+    const unit = lengthUnit.value;
+    const height = parseFloat(fenceHeight.value);
+    const heightMultiplier = parseFloat(fenceHeight.selectedOptions[0].dataset.priceMultiplier);
+    const style = getSelectedValue(fenceStyleInputs);
+    const stylePrice = parseFloat(getSelectedInput(fenceStyleInputs).dataset.price);
+    const gates = parseInt(gateCount.value) || 0;
+    const gatePrice = parseFloat(gateWidth.selectedOptions[0].dataset.price);
+    const corners = parseInt(cornerPosts.value) || 0;
+    const slope = parseFloat(slopeAdjustment.value);
+    const installation = getSelectedValue(installationInputs);
+    const installationCostPerMeter = installation === 'professional' ? 
+      parseFloat(getSelectedInput(installationInputs).dataset.cost) : 0;
+
+    // Convert length to feet if needed
+    const lengthInFeet = unit === 'meters' ? length * 3.28084 : length;
+    const lengthInMeters = unit === 'feet' ? length * 0.3048 : length;
+
+    // Calculate panels needed (6ft standard panel width)
+    const panelWidth = 6;
+    const panelsNeeded = Math.ceil(lengthInFeet / panelWidth);
+    
+    // Calculate posts needed
+    const linePostsNeeded = panelsNeeded + 1;
+    
+    // Calculate costs
+    const adjustedPanelPrice = stylePrice * heightMultiplier * slope;
+    const panelsCost = panelsNeeded * adjustedPanelPrice;
+    const linePostsCost = linePostsNeeded * PRICING.posts.line;
+    const cornerPostsCost = corners * PRICING.posts.corner;
+    const gatesCost = gates * gatePrice;
+    const materialsSubtotal = panelsCost + linePostsCost + cornerPostsCost + gatesCost;
+    
+    const installationSubtotal = installationCostPerMeter * lengthInMeters;
+    const subtotal = materialsSubtotal + installationSubtotal;
+    const vat = subtotal * PRICING.vat;
+    const total = subtotal + vat;
+
+    // Calculate lifetime costs for comparison
+    const vinylLifetime = total; // One-time cost
+    const woodLifetime = (total * 0.7) + (PRICING.maintenance.wood * 50); // Cheaper upfront, expensive maintenance
+
+    // Update display
+    panelCount.textContent = panelsNeeded;
+    panelCost.textContent = '£' + panelsCost.toFixed(2);
+    
+    postCount.textContent = linePostsNeeded;
+    postCost.textContent = '£' + linePostsCost.toFixed(2);
+    
+    cornerPostCount.textContent = corners;
+    cornerPostCost.textContent = '£' + cornerPostsCost.toFixed(2);
+    
+    gateTotal.textContent = gates;
+    gateCost.textContent = '£' + gatesCost.toFixed(2);
+    
+    materialsCost.textContent = '£' + materialsSubtotal.toFixed(2);
+    installationCost.textContent = '£' + installationSubtotal.toFixed(2);
+    vatCost.textContent = '£' + vat.toFixed(2);
+    totalCost.textContent = '£' + total.toFixed(2);
+    
+    vinylLifetimeCost.textContent = '£' + vinylLifetime.toFixed(0);
+    woodLifetimeCost.textContent = '£' + woodLifetime.toFixed(0);
+
+    // Update comparison bars
+    const maxCost = Math.max(vinylLifetime, woodLifetime);
+    document.querySelector('.bar.vinyl').style.width = (vinylLifetime / maxCost * 100) + '%';
+    document.querySelector('.bar.wood').style.width = (woodLifetime / maxCost * 100) + '%';
+  }
+
+  // Helper functions
+  function getSelectedValue(inputs) {
+    for (let input of inputs) {
+      if (input.checked) {
+        return input.value;
+      }
+    }
+    return null;
+  }
+
+  function getSelectedInput(inputs) {
+    for (let input of inputs) {
+      if (input.checked) {
+        return input;
+      }
+    }
+    return null;
+  }
+
+  function showResults() {
+    resultsContainer.classList.add('show');
+    resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function saveEstimate() {
+    const estimate = {
+      timestamp: new Date().toISOString(),
+      length: fenceLength.value,
+      unit: lengthUnit.value,
+      height: fenceHeight.value,
+      style: getSelectedValue(fenceStyleInputs),
+      gates: gateCount.value,
+      corners: cornerPosts.value,
+      installation: getSelectedValue(installationInputs),
+      totalCost: totalCost.textContent
+    };
+
+    localStorage.setItem('fenceEstimate_' + Date.now(), JSON.stringify(estimate));
+    alert('Estimate saved successfully! You can access it from your browser\'s local storage.');
+  }
+
+  // Auto-calculate on input change (optional)
+  const autoCalculateInputs = [fenceLength, fenceHeight, gateCount, cornerPosts];
+  autoCalculateInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      if (validateForm()) {
+        calculateProject();
+        if (resultsContainer.classList.contains('show')) {
+          // Only update if results are already showing
+          // Don't auto-show results
+        }
+      }
+    });
+  });
+
+  fenceStyleInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      if (validateForm()) {
+        calculateProject();
+      }
+    });
+  });
+
+  // Initialize with default values
+  lengthUnit.value = 'feet';
+  gateWidth.value = '4';
+  slopeAdjustment.value = '1.0';
+});
+</script>
+

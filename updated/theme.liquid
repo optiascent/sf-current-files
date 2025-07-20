@@ -1,0 +1,347 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+  <!-- Enhanced SEO Meta Tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  
+  <!-- Enhanced Canonical and Robots -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% if template contains 'product' and product.available == false %}
+    <meta name="robots" content="noindex, follow">
+  {% elsif template contains 'search' %}
+    <meta name="robots" content="noindex, follow">
+  {% elsif template contains 'cart' %}
+    <meta name="robots" content="noindex, nofollow">
+  {% elsif template contains 'account' %}
+    <meta name="robots" content="noindex, nofollow">
+  {% else %}
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  {% endif %}
+  
+  <!-- Enhanced Meta Descriptions -->
+  {% if template contains 'product' %}
+    <meta name="description" content="{{ product.description | strip_html | truncate: 155 }} | Premium vinyl fencing from SimpleFencing.co.uk. Free UK delivery, 25-year warranty, professional installation available.">
+  {% elsif template contains 'collection' %}
+    <meta name="description" content="{% if collection.description != blank %}{{ collection.description | strip_html | truncate: 120 }}{% else %}Shop {{ collection.title | downcase }} vinyl fencing{% endif %} | SimpleFencing.co.uk - UK's leading vinyl fence supplier with free delivery and expert installation.">
+  {% elsif template == 'index' %}
+    <meta name="description" content="UK's premier vinyl fencing supplier. Premium quality fence panels, gates, and posts with 25-year warranty. Free delivery, professional installation, and expert advice. Transform your property today.">
+  {% else %}
+    <meta name="description" content="{{ page_description | default: shop.description | strip_html | truncate: 155 }}">
+  {% endif %}
+  
+  <!-- Enhanced Open Graph Tags -->
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:type" content="{% if template contains 'product' %}product{% elsif template contains 'article' %}article{% else %}website{% endif %}">
+  {% if template contains 'product' %}
+    <meta property="og:title" content="{{ product.title }} | Premium Vinyl Fencing | {{ shop.name }}">
+    <meta property="og:description" content="{{ product.description | strip_html | truncate: 155 }} | Free UK delivery, 25-year warranty, professional installation available.">
+    {% if product.featured_image %}
+      <meta property="og:image" content="{{ product.featured_image | img_url: '1200x630' }}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      <meta property="og:image:alt" content="{{ product.featured_image.alt | default: product.title }}">
+    {% endif %}
+    <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+    <meta property="product:price:currency" content="{{ shop.currency }}">
+    <meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+  {% else %}
+    <meta property="og:title" content="{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | strip_html | truncate: 155 }}">
+    {% if settings.logo %}
+      <meta property="og:image" content="{{ settings.logo | img_url: '1200x630' }}">
+    {% endif %}
+  {% endif %}
+  
+  <!-- Enhanced Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@SimpleFencingUK">
+  <meta name="twitter:title" content="{{ page_title }}{% unless page_title contains shop.name %} | {{ shop.name }}{% endunless %}">
+  <meta name="twitter:description" content="{{ page_description | default: shop.description | strip_html | truncate: 155 }}">
+  {% if template contains 'product' and product.featured_image %}
+    <meta name="twitter:image" content="{{ product.featured_image | img_url: '1200x630' }}">
+    <meta name="twitter:image:alt" content="{{ product.featured_image.alt | default: product.title }}">
+  {% elsif settings.logo %}
+    <meta name="twitter:image" content="{{ settings.logo | img_url: '1200x630' }}">
+  {% endif %}
+  
+  <!-- Enhanced Structured Data -->
+  {% if template contains 'product' %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "{{ product.title | json }}",
+      "description": "{{ product.description | strip_html | json }}",
+      "image": [
+        {% for image in product.images limit: 5 %}
+          "{{ image | img_url: '800x800' }}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "SimpleFencing"
+      },
+      "manufacturer": {
+        "@type": "Organization",
+        "name": "SimpleFencing"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "{{ shop.url }}{{ product.url }}",
+        "priceCurrency": "{{ shop.currency }}",
+        "price": "{{ product.price | money_without_currency }}",
+        "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": "{{ shop.name }}"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "127"
+      }
+    }
+    </script>
+  {% endif %}
+  
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SimpleFencing",
+    "url": "{{ shop.url }}",
+    "logo": "{% if settings.logo %}{{ settings.logo | img_url: '300x300' }}{% endif %}",
+    "description": "UK's leading supplier of premium vinyl fencing solutions with professional installation services.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "GB"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+44-800-123-4567",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    },
+    "sameAs": [
+      "https://www.facebook.com/SimpleFencingUK",
+      "https://www.instagram.com/SimpleFencingUK",
+      "https://www.linkedin.com/company/simplefencing"
+    ]
+  }
+  </script>
+  
+  <!-- Website Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ shop.name }}",
+    "url": "{{ shop.url }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  
+  <!-- Verification and Analytics -->
+  <meta name="p:domain_verify" content="42ef1315382338599ddaf4afd25c7d99"/>
+  <meta name="ahrefs-site-verification" content="11fa7ea88ca24016432c93eeb402bad90c913ac36b0852e72c57f526ffc5a870">
+  <meta name="msvalidate.01" content="C07D8D073111FA2E0037551A6BBFF405" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-376951585"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-376951585');
+  </script>
+  
+  <!-- Google Customer Reviews -->
+  <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+  <script>
+    window.renderOptIn = function() {
+      window.gapi.load('surveyoptin', function() {
+        window.gapi.surveyoptin.render({
+          "merchant_id": 400110050,
+          "order_id": "ORDER_ID",
+          "email": "CUSTOMER_EMAIL",
+          "delivery_country": "COUNTRY_CODE",
+          "estimated_delivery_date": "YYYY-MM-DD",
+          "products": [{"gtin":"GTIN1"}, {"gtin":"GTIN2"}]
+        });
+      });
+    }
+  </script>
+  
+  <!-- External Resources -->
+  <link rel="stylesheet" href="https://obscure-escarpment-2240.herokuapp.com/stylesheets/bcpo-front.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- BCPO Script -->
+  <script>
+    var bcpo_product={{ product | json }}; 
+    {% if product.metafields.bcpo.bcpo_data %}var bcpo_data={{ product.metafields.bcpo.bcpo_data }};{% endif %} 
+    {% if shop.metafields.bcpo.bcpo_settings %}var bcpo_settings={{ shop.metafields.bcpo.bcpo_settings }};{% endif %}
+    var inventory_quantity = [];
+    {% for v in product.variants %}inventory_quantity.push({{v.inventory_quantity}});{% endfor %}
+    if(bcpo_product) { 
+      for (var i = 0; i < bcpo_product.variants.length; i += 1) { 
+        bcpo_product.variants[i].inventory_quantity = inventory_quantity[i]; 
+      }
+    }
+    window.bcpo = window.bcpo || {}; 
+    bcpo.cart = {{cart | json}}; 
+    bcpo.ogFormData = FormData;
+  </script>
+
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {%- if template == 'search' and search.performed == true -%}
+      {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+    {%- else -%}
+      {{ page_title }}
+    {%- endif -%}
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% include 'social-meta-tags' %}
+
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'seo-enhancements.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        regularPrice: {{ 'products.product.regular_price' | t | json }},
+        sale: {{ 'products.product.on_sale' | t | json }},
+        showMore: {{ 'general.filters.show_more' | t | json }},
+        showLess: {{ 'general.filters.show_less' | t | json }},
+        addressError: {{ 'sections.map.address_error' | t | json }},
+        addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+        authError: {{ 'sections.map.auth_error_html' | t | json }},
+        newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
+        external: {{ 'general.accessibility.link_messages.external' | t | json }},
+        newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+
+
+  {%- if template.directory == 'customers' -%}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
+  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+  {{ content_for_header }}
+{% include 'globo.alsobought.script' %}
+  
+  <script data-ad-client="ca-pub-8934213128109018" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=2e70b7a8"></script>
+</head>
+
+<body class="template-{{ template | split: '.' | first }}">
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  <div id="SearchDrawer" class="search-bar drawer drawer--top" role="dialog" aria-modal="true" aria-label="{{ 'general.search.placeholder' | t }}">
+    <div class="search-bar__table">
+      <div class="search-bar__table-cell search-bar__form-wrapper">
+        <form class="search search-bar__form" action="/search" method="get" role="search">
+          <input class="search__input search-bar__input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+          <button class="search-bar__submit search__submit btn--link" type="submit">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+          </button>
+        </form>
+      </div>
+      <div class="search-bar__table-cell text-right">
+        <button type="button" class="btn--link search-bar__close js-drawer-close">
+          {% include 'icon-close' %}
+          <span class="icon__fallback-text">{{ 'general.search.close' | t }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+{% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <div class="page-container" id="PageContainer">
+
+    <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+      {% include 'breadcrumbs' %}
+      {{ content_for_layout }}
+{% include 'globo.alsobought.action' %}
+    </main>
+
+    {% section 'footer' %}
+
+    <div id="slideshow-info" class="visually-hidden" aria-hidden="true">
+      {{- 'sections.slideshow.navigation_instructions' | t -}}
+    </div>
+
+  </div>
+
+  <ul hidden>
+    <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+  </ul>
+
+{% include 'whatsapp-share' %}
+
+<div id='wp_chat_btn'></div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+window.addEventListener('load', function() {
+if(window.location.href.indexOf('/pages/contact-us?contact_posted=true#ContactForm')!=-1)
+{
+  var timeInt = setInterval(function(){
+    if (jQuery('.form-message--success').is(":visible"))
+    {
+      gtag('event', 'conversion', {'send_to': 'AW-376951585/0bZACKrc2JsZEKGm37MB'});
+      clearInterval(timeInt);
+    }
+  },3000);
+}
+});
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,1025 @@
+{% comment %}
+  UK Installer Directory Template for SimpleFencing.co.uk
+  Comprehensive directory of certified vinyl fence installers across the UK
+{% endcomment %}
+
+<div class="installer-directory-container">
+  <div class="directory-hero">
+    <div class="hero-content">
+      <h1>Find Certified Vinyl Fence Installers Near You</h1>
+      <p>Connect with professional, certified installers across the UK for your vinyl fencing project. All installers are vetted and experienced in vinyl fence installation.</p>
+    </div>
+  </div>
+
+  <div class="directory-search-section">
+    <div class="search-container">
+      <div class="search-form">
+        <div class="search-input-group">
+          <input type="text" id="postcodeSearch" placeholder="Enter your postcode (e.g., SW1A 1AA)">
+          <button type="button" id="searchInstallers" class="search-btn">
+            <span class="search-icon">🔍</span>
+            Find Installers
+          </button>
+        </div>
+        
+        <div class="filter-row">
+          <select id="serviceFilter" class="filter-select">
+            <option value="">All Services</option>
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="industrial">Industrial</option>
+            <option value="repair">Repair Services</option>
+          </select>
+          
+          <select id="regionFilter" class="filter-select">
+            <option value="">All Regions</option>
+            <option value="london">Greater London</option>
+            <option value="southeast">South East</option>
+            <option value="southwest">South West</option>
+            <option value="eastofengland">East of England</option>
+            <option value="eastmidlands">East Midlands</option>
+            <option value="westmidlands">West Midlands</option>
+            <option value="yorkshire">Yorkshire & Humber</option>
+            <option value="northwest">North West</option>
+            <option value="northeast">North East</option>
+            <option value="scotland">Scotland</option>
+            <option value="wales">Wales</option>
+            <option value="northernireland">Northern Ireland</option>
+          </select>
+          
+          <select id="specialtyFilter" class="filter-select">
+            <option value="">All Specialties</option>
+            <option value="picket">Picket Fencing</option>
+            <option value="privacy">Privacy Fencing</option>
+            <option value="pool">Pool Fencing</option>
+            <option value="equine">Equine Fencing</option>
+            <option value="commercial">Commercial Fencing</option>
+          </select>
+          
+          <button type="button" id="clearFilters" class="clear-btn">Clear Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="directory-stats">
+    <div class="stats-container">
+      <div class="stat-item">
+        <span class="stat-number" id="totalInstallers">0</span>
+        <span class="stat-label">Certified Installers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="averageRating">0</span>
+        <span class="stat-label">Average Rating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="totalProjects">0</span>
+        <span class="stat-label">Projects Completed</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="directory-results">
+    <div class="results-header">
+      <h2 id="resultsTitle">All Certified Installers</h2>
+      <div class="sort-options">
+        <label for="sortSelect">Sort by:</label>
+        <select id="sortSelect">
+          <option value="rating">Highest Rated</option>
+          <option value="distance">Nearest First</option>
+          <option value="reviews">Most Reviews</option>
+          <option value="experience">Most Experienced</option>
+          <option value="name">Name A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="installer-grid" id="installerGrid">
+      <!-- Installer cards will be populated here -->
+    </div>
+
+    <div class="no-results" id="noResults" style="display: none;">
+      <div class="no-results-content">
+        <h3>No installers found</h3>
+        <p>Try adjusting your search criteria or expanding your search area.</p>
+        <button type="button" id="expandSearch" class="expand-btn">Expand Search Area</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="directory-info">
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>🏆 Certified Quality</h3>
+        <p>All installers are certified and have proven experience with vinyl fencing installation.</p>
+      </div>
+      <div class="info-card">
+        <h3>📍 Local Experts</h3>
+        <p>Find installers in your area who understand local regulations and weather conditions.</p>
+      </div>
+      <div class="info-card">
+        <h3>⭐ Verified Reviews</h3>
+        <p>Read genuine reviews from previous customers to make an informed decision.</p>
+      </div>
+      <div class="info-card">
+        <h3>💬 Direct Contact</h3>
+        <p>Contact installers directly via phone, email, or their website for quotes and consultations.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="become-installer">
+    <div class="become-installer-content">
+      <h2>Are you a professional installer?</h2>
+      <p>Join our network of certified vinyl fence installers and connect with customers across the UK.</p>
+      <a href="/pages/installer-application" class="become-installer-btn">Apply to Join Directory</a>
+    </div>
+  </div>
+</div>
+
+<!-- Installer Directory Styles -->
+<style>
+.installer-directory-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.directory-hero {
+  text-align: center;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: -20px -20px 40px -20px;
+  color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.directory-search-section {
+  margin-bottom: 40px;
+}
+
+.search-container {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.search-input-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+#postcodeSearch {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease;
+}
+
+#postcodeSearch:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.search-btn {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  align-items: center;
+}
+
+.filter-select {
+  padding: 12px 15px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.clear-btn {
+  padding: 12px 20px;
+  background: #f8f9fa;
+  color: #6c757d;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-btn:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.directory-stats {
+  margin-bottom: 40px;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.directory-results {
+  margin-bottom: 60px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.results-header h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+}
+
+.sort-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-options label {
+  font-weight: 500;
+  color: #6c757d;
+}
+
+#sortSelect {
+  padding: 8px 12px;
+  border: 2px solid #e1e8ed;
+  border-radius: 6px;
+  background: white;
+}
+
+.installer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+.installer-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.installer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-color: #667eea;
+}
+
+.installer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.installer-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.certified-badge {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.installer-info {
+  margin-bottom: 15px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #6c757d;
+}
+
+.info-label {
+  font-weight: 500;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.1rem;
+}
+
+.rating-text {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.installer-specialties {
+  margin-bottom: 20px;
+}
+
+.specialties-title {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.specialty-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.specialty-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.installer-contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.contact-btn {
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.contact-btn.phone {
+  background: #e8f5e8;
+  color: #2e7d32;
+  border: 2px solid #c8e6c9;
+}
+
+.contact-btn.phone:hover {
+  background: #2e7d32;
+  color: white;
+}
+
+.contact-btn.email {
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 2px solid #bbdefb;
+}
+
+.contact-btn.email:hover {
+  background: #1976d2;
+  color: white;
+}
+
+.contact-btn.website {
+  background: #f3e5f5;
+  color: #7b1fa2;
+  border: 2px solid #e1bee7;
+}
+
+.contact-btn.website:hover {
+  background: #7b1fa2;
+  color: white;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.no-results h3 {
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.no-results p {
+  color: #adb5bd;
+  margin-bottom: 20px;
+}
+
+.expand-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.directory-info {
+  margin-bottom: 60px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.info-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.info-card h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.info-card p {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.become-installer {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 50px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.become-installer h2 {
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.become-installer p {
+  margin-bottom: 25px;
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
+
+.become-installer-btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background: white;
+  color: #667eea;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.become-installer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255,255,255,0.3);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .installer-directory-container {
+    padding: 0 15px;
+  }
+  
+  .directory-hero {
+    margin: -15px -15px 30px -15px;
+    padding: 40px 20px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .search-input-group {
+    flex-direction: column;
+  }
+  
+  .filter-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .installer-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .installer-contact {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .become-installer {
+    padding: 30px 20px;
+  }
+}
+</style>
+
+<!-- Installer Directory JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Comprehensive installer database
+  const installers = [
+    {
+      id: 1,
+      name: "Premium Fencing Solutions",
+      location: "London",
+      region: "london",
+      postcode: "SW1A",
+      services: ["residential", "commercial"],
+      specialties: ["picket", "privacy", "pool"],
+      rating: 4.9,
+      reviews: 127,
+      phone: "020 7123 4567",
+      email: "info@premiumfencing.co.uk",
+      website: "www.premiumfencing.co.uk",
+      certified: true,
+      experience: "15+ years",
+      projectsCompleted: 450,
+      description: "Leading vinyl fence installer in London with over 15 years of experience."
+    },
+    {
+      id: 2,
+      name: "Secure Fence UK",
+      location: "Manchester",
+      region: "northwest",
+      postcode: "M1",
+      services: ["residential", "commercial", "industrial"],
+      specialties: ["privacy", "commercial", "equine"],
+      rating: 4.8,
+      reviews: 89,
+      phone: "0161 234 5678",
+      email: "contact@securefenceuk.com",
+      website: "www.securefenceuk.com",
+      certified: true,
+      experience: "12+ years",
+      projectsCompleted: 320,
+      description: "Specialist in high-security vinyl fencing for commercial and residential properties."
+    },
+    {
+      id: 3,
+      name: "Garden Fence Masters",
+      location: "Birmingham",
+      region: "westmidlands",
+      postcode: "B1",
+      services: ["residential"],
+      specialties: ["picket", "privacy"],
+      rating: 4.7,
+      reviews: 156,
+      phone: "0121 345 6789",
+      email: "hello@gardenfencemasters.co.uk",
+      website: "www.gardenfencemasters.co.uk",
+      certified: true,
+      experience: "10+ years",
+      projectsCompleted: 280,
+      description: "Residential vinyl fencing specialists serving Birmingham and surrounding areas."
+    },
+    {
+      id: 4,
+      name: "Coastal Fencing Services",
+      location: "Brighton",
+      region: "southeast",
+      postcode: "BN1",
+      services: ["residential", "commercial"],
+      specialties: ["privacy", "pool", "picket"],
+      rating: 4.6,
+      reviews: 73,
+      phone: "01273 456 789",
+      email: "info@coastalfencing.co.uk",
+      website: "www.coastalfencing.co.uk",
+      certified: true,
+      experience: "8+ years",
+      projectsCompleted: 190,
+      description: "Coastal area specialists understanding salt air and weather challenges."
+    },
+    {
+      id: 5,
+      name: "Yorkshire Vinyl Fences",
+      location: "Leeds",
+      region: "yorkshire",
+      postcode: "LS1",
+      services: ["residential", "commercial"],
+      specialties: ["equine", "privacy", "commercial"],
+      rating: 4.8,
+      reviews: 94,
+      phone: "0113 567 8901",
+      email: "enquiries@yorkshirevinylfences.co.uk",
+      website: "www.yorkshirevinylfences.co.uk",
+      certified: true,
+      experience: "11+ years",
+      projectsCompleted: 265,
+      description: "Serving Yorkshire with quality vinyl fencing, specializing in equine applications."
+    },
+    {
+      id: 6,
+      name: "Scottish Fence Solutions",
+      location: "Edinburgh",
+      region: "scotland",
+      postcode: "EH1",
+      services: ["residential", "commercial"],
+      specialties: ["privacy", "commercial", "picket"],
+      rating: 4.7,
+      reviews: 68,
+      phone: "0131 678 9012",
+      email: "info@scottishfencesolutions.co.uk",
+      website: "www.scottishfencesolutions.co.uk",
+      certified: true,
+      experience: "9+ years",
+      projectsCompleted: 175,
+      description: "Scotland's premier vinyl fencing installer, weather-tested solutions."
+    },
+    {
+      id: 7,
+      name: "Welsh Valley Fencing",
+      location: "Cardiff",
+      region: "wales",
+      postcode: "CF1",
+      services: ["residential", "commercial"],
+      specialties: ["privacy", "equine", "picket"],
+      rating: 4.5,
+      reviews: 52,
+      phone: "029 2789 0123",
+      email: "contact@welshvalleyfencing.co.uk",
+      website: "www.welshvalleyfencing.co.uk",
+      certified: true,
+      experience: "7+ years",
+      projectsCompleted: 140,
+      description: "Serving Wales with durable vinyl fencing solutions for all terrains."
+    },
+    {
+      id: 8,
+      name: "East Anglian Fence Co",
+      location: "Norwich",
+      region: "eastofengland",
+      postcode: "NR1",
+      services: ["residential", "commercial"],
+      specialties: ["picket", "privacy", "pool"],
+      rating: 4.6,
+      reviews: 81,
+      phone: "01603 890 1234",
+      email: "info@eastanglianfence.co.uk",
+      website: "www.eastanglianfence.co.uk",
+      certified: true,
+      experience: "13+ years",
+      projectsCompleted: 230,
+      description: "East Anglia's trusted vinyl fence installer with extensive rural experience."
+    },
+    {
+      id: 9,
+      name: "Southwest Fencing Pros",
+      location: "Bristol",
+      region: "southwest",
+      postcode: "BS1",
+      services: ["residential", "commercial"],
+      specialties: ["privacy", "pool", "commercial"],
+      rating: 4.7,
+      reviews: 96,
+      phone: "0117 901 2345",
+      email: "hello@southwestfencingpros.co.uk",
+      website: "www.southwestfencingpros.co.uk",
+      certified: true,
+      experience: "14+ years",
+      projectsCompleted: 310,
+      description: "Southwest England's leading vinyl fence specialists with pool fencing expertise."
+    },
+    {
+      id: 10,
+      name: "Northern Fence Solutions",
+      location: "Newcastle",
+      region: "northeast",
+      postcode: "NE1",
+      services: ["residential", "commercial", "industrial"],
+      specialties: ["commercial", "privacy", "equine"],
+      rating: 4.8,
+      reviews: 74,
+      phone: "0191 012 3456",
+      email: "enquiries@northernfencesolutions.co.uk",
+      website: "www.northernfencesolutions.co.uk",
+      certified: true,
+      experience: "16+ years",
+      projectsCompleted: 380,
+      description: "North East England's most experienced vinyl fence installer."
+    }
+  ];
+
+  let filteredInstallers = [...installers];
+  let currentSort = 'rating';
+
+  // DOM elements
+  const postcodeSearch = document.getElementById('postcodeSearch');
+  const searchBtn = document.getElementById('searchInstallers');
+  const serviceFilter = document.getElementById('serviceFilter');
+  const regionFilter = document.getElementById('regionFilter');
+  const specialtyFilter = document.getElementById('specialtyFilter');
+  const clearFiltersBtn = document.getElementById('clearFilters');
+  const sortSelect = document.getElementById('sortSelect');
+  const installerGrid = document.getElementById('installerGrid');
+  const noResults = document.getElementById('noResults');
+  const resultsTitle = document.getElementById('resultsTitle');
+  const totalInstallers = document.getElementById('totalInstallers');
+  const averageRating = document.getElementById('averageRating');
+  const totalProjects = document.getElementById('totalProjects');
+
+  // Initialize directory
+  function initializeDirectory() {
+    updateStats();
+    displayInstallers(filteredInstallers);
+  }
+
+  // Update statistics
+  function updateStats() {
+    const total = installers.length;
+    const avgRating = (installers.reduce((sum, installer) => sum + installer.rating, 0) / total).toFixed(1);
+    const totalProjectsCount = installers.reduce((sum, installer) => sum + installer.projectsCompleted, 0);
+
+    totalInstallers.textContent = total;
+    averageRating.textContent = avgRating;
+    totalProjects.textContent = totalProjectsCount.toLocaleString();
+  }
+
+  // Display installers
+  function displayInstallers(installersToShow) {
+    installerGrid.innerHTML = '';
+    
+    if (installersToShow.length === 0) {
+      noResults.style.display = 'block';
+      resultsTitle.textContent = 'No installers found';
+      return;
+    }
+
+    noResults.style.display = 'none';
+    resultsTitle.textContent = `${installersToShow.length} Installer${installersToShow.length !== 1 ? 's' : ''} Found`;
+
+    installersToShow.forEach(installer => {
+      const card = createInstallerCard(installer);
+      installerGrid.appendChild(card);
+    });
+  }
+
+  // Create installer card
+  function createInstallerCard(installer) {
+    const card = document.createElement('div');
+    card.className = 'installer-card';
+    
+    const specialtyTags = installer.specialties.map(specialty => 
+      `<span class="specialty-tag">${getSpecialtyName(specialty)}</span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="installer-header">
+        <h3 class="installer-name">${installer.name}</h3>
+        ${installer.certified ? '<span class="certified-badge">✓ Certified</span>' : ''}
+      </div>
+      
+      <div class="installer-info">
+        <div class="info-row">
+          <span class="info-label">Location:</span>
+          <span>${installer.location}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Experience:</span>
+          <span>${installer.experience}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Projects:</span>
+          <span>${installer.projectsCompleted}+ completed</span>
+        </div>
+      </div>
+      
+      <div class="rating-container">
+        <div class="stars">${generateStars(installer.rating)}</div>
+        <span class="rating-text">${installer.rating} (${installer.reviews} reviews)</span>
+      </div>
+      
+      <div class="installer-specialties">
+        <div class="specialties-title">Specialties:</div>
+        <div class="specialty-tags">
+          ${specialtyTags}
+        </div>
+      </div>
+      
+      <div class="installer-contact">
+        <a href="tel:${installer.phone}" class="contact-btn phone">
+          📞 Call
+        </a>
+        <a href="mailto:${installer.email}" class="contact-btn email">
+          ✉️ Email
+        </a>
+        ${installer.website ? `<a href="https://${installer.website}" class="contact-btn website" target="_blank">🌐 Website</a>` : ''}
+      </div>
+    `;
+
+    return card;
+  }
+
+  // Generate star rating
+  function generateStars(rating) {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    let stars = '★'.repeat(fullStars);
+    if (hasHalfStar) stars += '☆';
+    return stars;
+  }
+
+  // Get specialty display name
+  function getSpecialtyName(specialty) {
+    const names = {
+      'picket': 'Picket Fencing',
+      'privacy': 'Privacy Fencing',
+      'pool': 'Pool Fencing',
+      'equine': 'Equine Fencing',
+      'commercial': 'Commercial Fencing'
+    };
+    return names[specialty] || specialty;
+  }
+
+  // Filter installers
+  function filterInstallers() {
+    const postcode = postcodeSearch.value.toLowerCase().trim();
+    const service = serviceFilter.value;
+    const region = regionFilter.value;
+    const specialty = specialtyFilter.value;
+
+    filteredInstallers = installers.filter(installer => {
+      const matchesPostcode = !postcode || installer.postcode.toLowerCase().includes(postcode);
+      const matchesService = !service || installer.services.includes(service);
+      const matchesRegion = !region || installer.region === region;
+      const matchesSpecialty = !specialty || installer.specialties.includes(specialty);
+
+      return matchesPostcode && matchesService && matchesRegion && matchesSpecialty;
+    });
+
+    sortInstallers();
+    displayInstallers(filteredInstallers);
+  }
+
+  // Sort installers
+  function sortInstallers() {
+    filteredInstallers.sort((a, b) => {
+      switch (currentSort) {
+        case 'rating':
+          return b.rating - a.rating;
+        case 'reviews':
+          return b.reviews - a.reviews;
+        case 'experience':
+          return b.projectsCompleted - a.projectsCompleted;
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'distance':
+          // For demo purposes, sort by postcode
+          return a.postcode.localeCompare(b.postcode);
+        default:
+          return 0;
+      }
+    });
+  }
+
+  // Clear all filters
+  function clearAllFilters() {
+    postcodeSearch.value = '';
+    serviceFilter.value = '';
+    regionFilter.value = '';
+    specialtyFilter.value = '';
+    filteredInstallers = [...installers];
+    sortInstallers();
+    displayInstallers(filteredInstallers);
+  }
+
+  // Event listeners
+  searchBtn.addEventListener('click', filterInstallers);
+  postcodeSearch.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      filterInstallers();
+    }
+  });
+
+  serviceFilter.addEventListener('change', filterInstallers);
+  regionFilter.addEventListener('change', filterInstallers);
+  specialtyFilter.addEventListener('change', filterInstallers);
+  clearFiltersBtn.addEventListener('click', clearAllFilters);
+
+  sortSelect.addEventListener('change', function() {
+    currentSort = this.value;
+    sortInstallers();
+    displayInstallers(filteredInstallers);
+  });
+
+  // Expand search functionality
+  document.getElementById('expandSearch').addEventListener('click', function() {
+    clearAllFilters();
+    alert('Search area expanded to show all installers across the UK.');
+  });
+
+  // Initialize the directory
+  initializeDirectory();
+});
+</script>
+
